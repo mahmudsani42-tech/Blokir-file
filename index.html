@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Download Center</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #777;
+            font-size: 16px;
+        }
+
+        .download-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            border: 1px solid #e5e5e5;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 13px 20px;
+            text-decoration: none;
+            color: white;
+            background: #667eea;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+            transform: scale(1.02);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 35px;
+            color: #999;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                padding: 25px 20px;
+            }
+
+            .header h1 {
+                font-size: 26px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>📥 Download Center</h1>
+            <p>Silakan pilih file yang ingin Anda download.</p>
+        </div>
+
+
+        <div class="download-list">
+
+            <!-- FILE MP3 -->
+            <div class="card">
+
+                <div class="icon">🎵</div>
+
+                <h2>File MP3</h2>
+
+                <p>
+                    Download file audio dalam format MP3.
+                </p>
+
+                <a
+                    href="https://drive.google.com/file/d/1rXseS_ilhqKvfy0ith8OnIR97KQBFv9v/view?usp=drive_link"
+                    target="_blank"
+                    class="btn">
+
+                    Download MP3
+
+                </a>
+
+            </div>
+
+
+            <!-- FILE MKV -->
+            <div class="card">
+
+                <div class="icon">🎬</div>
+
+                <h2>File MKV</h2>
+
+                <p>
+                    Download file video dalam format MKV.
+                </p>
+
+                <a
+                    href="https://drive.google.com/file/d/17-xz49cK7QGmc1wgFwz6Fa7onURl_Aqn/view?usp=drive_link"
+                    target="_blank"
+                    class="btn">
+
+                    Download MKV
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <footer>
+            © 2026 Download Center | Semua file tersedia melalui Google Drive
+        </footer>
+
+    </div>
+
+</body>
+</html>
