@@ -1,192 +1,327 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Data Diri</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <title>Download Center</title>
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    .container {
+      background: #ffffff;
+      padding: 36px 32px;
+      border-radius: 18px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.18);
+      width: 100%;
+      max-width: 640px;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 850px;
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-        }
+    .header h1 {
+      font-size: 1.7rem;
+      color: #1e1e2f;
+      margin-bottom: 6px;
+    }
 
-        .header {
-            text-align: center;
-            margin-bottom: 35px;
-        }
+    .header p {
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
 
-        .header h1 {
-            color: #333;
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
+    .section-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #4f46e5;
+      margin: 22px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e0e7ff;
+    }
 
-        .header p {
-            color: #777;
-            font-size: 16px;
-        }
+    .form-group {
+      margin-bottom: 16px;
+    }
 
-        .download-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #374151;
+      font-size: 0.88rem;
+    }
 
-        .card {
-            border: 1px solid #e5e5e5;
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            transition: 0.3s;
-        }
+    .required::after {
+      content: " *";
+      color: #ef4444;
+    }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-        }
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      color: #111827;
+      background: #f9fafb;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
 
-        .icon {
-            font-size: 60px;
-            margin-bottom: 15px;
-        }
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+    }
 
-        .card h2 {
-            color: #333;
-            margin-bottom: 10px;
-        }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
 
-        .card p {
-            color: #777;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
+    .row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
 
-        .btn {
-            display: inline-block;
-            width: 100%;
-            padding: 13px 20px;
-            text-decoration: none;
-            color: white;
-            background: #667eea;
-            border-radius: 10px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
+    @media (max-width: 560px) {
+      .row,
+      .row-3 {
+        grid-template-columns: 1fr;
+      }
+    }
 
-        .btn:hover {
-            background: #764ba2;
-            transform: scale(1.02);
-        }
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 18px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+    }
 
-        footer {
-            text-align: center;
-            margin-top: 35px;
-            color: #999;
-            font-size: 13px;
-        }
+    button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
 
-        @media (max-width: 600px) {
+    button:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
 
-            .container {
-                padding: 25px 20px;
-            }
+    #status {
+      text-align: center;
+      margin-top: 16px;
+      font-weight: 500;
+      min-height: 24px;
+      font-size: 0.95rem;
+    }
 
-            .header h1 {
-                font-size: 26px;
-            }
+    .success { color: #16a34a; }
+    .error { color: #dc2626; }
 
-        }
-    </style>
-
+    .note {
+      margin-top: 20px;
+      padding: 12px 14px;
+      background: #f3f4f6;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: #6b7280;
+      line-height: 1.45;
+    }
+  </style>
 </head>
-
 <body>
-
-    <div class="container">
-
-        <div class="header">
-            <h1>📥 Download Center</h1>
-            <p>Silakan pilih file yang ingin Anda download.</p>
-        </div>
-
-
-        <div class="download-list">
-
-            <!-- FILE MP3 -->
-            <div class="card">
-
-                <div class="icon">🎵</div>
-
-                <h2>File MP3</h2>
-
-                <p>
-                    Download file audio dalam format MP3.
-                </p>
-
-                <a
-                    href="https://drive.google.com/file/d/1rXseS_ilhqKvfy0ith8OnIR97KQBFv9v/view?usp=drive_link"
-                    target="_blank"
-                    class="btn">
-
-                    Download MP3
-
-                </a>
-
-            </div>
-
-
-            <!-- FILE MKV -->
-            <div class="card">
-
-                <div class="icon">🎬</div>
-
-                <h2>File MKV</h2>
-
-                <p>
-                    Download file video dalam format MKV.
-                </p>
-
-                <a
-                    href="https://drive.google.com/file/d/17-xz49cK7QGmc1wgFwz6Fa7onURl_Aqn/view?usp=drive_link"
-                    target="_blank"
-                    class="btn">
-
-                    Download MKV
-
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <footer>
-            © 2026 Download Center | Semua file tersedia melalui Google Drive
-        </footer>
-
+  <div class="container">
+    <div class="header">
+      <h1>Form Data Diri</h1>
+      <p>Silakan lengkapi data di bawah ini dengan benar</p>
     </div>
 
+    <form id="formDataDiri" name="formDataDiri">
+
+      <!-- ===================== DATA PRIBADI ===================== -->
+      <div class="section-title">Data Pribadi</div>
+
+      <div class="form-group">
+        <label for="Nama Lengkap" class="required">Nama Lengkap</label>
+        <input type="text" id="Nama Lengkap" name="Nama Lengkap" required placeholder="Contoh: Budi Santoso">
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <label for="Tempat Lahir" class="required">Tempat Lahir</label>
+          <input type="text" id="Tempat Lahir" name="Tempat Lahir" required placeholder="Contoh: Jakarta">
+        </div>
+        <div class="form-group">
+          <label for="Tanggal Lahir" class="required">Tanggal Lahir</label>
+          <input type="date" id="Tanggal Lahir" name="Tanggal Lahir" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <label for="Jenis Kelamin" class="required">Jenis Kelamin</label>
+          <select id="Jenis Kelamin" name="Jenis Kelamin" required>
+            <option value="">-- Pilih --</option>
+            <option value="Laki-laki">Laki-laki</option>
+            <option value="Perempuan">Perempuan</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="Usia">Usia</label>
+          <input type="number" id="Usia" name="Usia" min="1" max="120" placeholder="Contoh: 25">
+        </div>
+      </div>
+
+      <!-- ===================== ALAMAT ===================== -->
+      <div class="section-title">Alamat</div>
+
+      <div class="form-group">
+        <label for="Nama Jalan" class="required">Nama Jalan / Alamat</label>
+        <input type="text" id="Nama Jalan" name="Nama Jalan" required placeholder="Contoh: Jl. Merdeka No. 10">
+      </div>
+
+      <div class="row-3">
+        <div class="form-group">
+          <label for="RT">RT</label>
+          <input type="text" id="RT" name="RT" placeholder="001">
+        </div>
+        <div class="form-group">
+          <label for="RW">RW</label>
+          <input type="text" id="RW" name="RW" placeholder="002">
+        </div>
+        <div class="form-group">
+          <label for="Dusun">Dusun</label>
+          <input type="text" id="Dusun" name="Dusun" placeholder="Nama Dusun">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <label for="Desa/Kelurahan" class="required">Desa / Kelurahan</label>
+          <input type="text" id="Desa/Kelurahan" name="Desa/Kelurahan" required placeholder="Nama Desa/Kelurahan">
+        </div>
+        <div class="form-group">
+          <label for="Kecamatan" class="required">Kecamatan</label>
+          <input type="text" id="Kecamatan" name="Kecamatan" required placeholder="Nama Kecamatan">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <label for="Kota/Kabupaten" class="required">Kota / Kabupaten</label>
+          <input type="text" id="Kota/Kabupaten" name="Kota/Kabupaten" required placeholder="Contoh: Kota Bandung">
+        </div>
+        <div class="form-group">
+          <label for="Provinsi" class="required">Provinsi</label>
+          <input type="text" id="Provinsi" name="Provinsi" required placeholder="Contoh: Jawa Barat">
+        </div>
+      </div>
+
+      <!-- ===================== KONTAK ===================== -->
+      <div class="section-title">Kontak</div>
+
+      <div class="row">
+        <div class="form-group">
+          <label for="Email" class="required">Email</label>
+          <input type="email" id="Email" name="Email" required placeholder="contoh@email.com">
+        </div>
+        <div class="form-group">
+          <label for="No HP" class="required">No. HP / WhatsApp</label>
+          <input type="tel" id="No HP" name="No HP" required placeholder="08xxxxxxxxxx">
+        </div>
+      </div>
+
+      <button type="submit" id="btnSubmit">Kirim Data</button>
+    </form>
+
+    <div id="status"></div>
+
+    <div class="note">
+      <strong>Catatan:</strong> Ganti <code>SCRIPT_URL</code> di bagian JavaScript dengan URL Web App Google Apps Script milikmu.
+    </div>
+  </div>
+
+  <script>
+    // ============================================
+    // GANTI URL INI dengan URL Web App kamu
+    // ============================================
+    const SCRIPT_URL = https://script.google.com/macros/s/AKfycbxrXpm0JlkakAcBqO0epKvGV3eg6UBPcEJGRl-LZ6Gkh2XV6qbJ04EJqnDM0IsEIKeU/exec;
+
+    const form = document.getElementById("formDataDiri");
+    const statusEl = document.getElementById("status");
+    const btn = document.getElementById("btnSubmit");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      btn.disabled = true;
+      btn.textContent = "Mengirim...";
+      statusEl.textContent = "";
+      statusEl.className = "";
+
+      try {
+        const formData = new FormData(form);
+
+        const response = await fetch(SCRIPT_URL, {
+          method: "POST",
+          body: formData
+        });
+
+        const text = await response.text();
+        let result;
+        try {
+          result = JSON.parse(text);
+        } catch {
+          result = { result: "success" };
+        }
+
+        if (result.result === "success" || response.ok) {
+          statusEl.textContent = "✅ Data berhasil disimpan!";
+          statusEl.className = "success";
+          form.reset();
+        } else {
+          throw new Error(result.message || "Gagal menyimpan data");
+        }
+      } catch (error) {
+        console.error(error);
+        statusEl.textContent = "❌ Gagal mengirim data. Periksa koneksi atau SCRIPT_URL.";
+        statusEl.className = "error";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Kirim Data";
+      }
+    });
+  </script>
 </body>
 </html>
